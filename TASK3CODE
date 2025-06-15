@@ -1,0 +1,57 @@
+import random
+import json
+import nltk
+import numpy as np
+from nltk.stem import WordNetLemmatizer
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.linear_model import LogisticRegression
+
+# Load data
+with open("intents.json") as file:
+    data = json.load(file)
+
+lemmatizer = WordNetLemmatizer()
+
+# Prepare data
+corpus = []
+labels = []
+
+for intent in data['intents']:
+    for pattern in intent['patterns']:
+        corpus.append(pattern)
+        labels.append(intent['tag'])
+
+# Preprocess input
+def preprocess(sentence):
+    tokens = nltk.word_tokenize(sentence.lower())
+    return ' '.join([lemmatizer.lemmatize(word) for word in tokens])
+
+corpus = [preprocess(sentence) for sentence in corpus]
+
+# Vectorization
+vectorizer = CountVectorizer()
+X = vectorizer.fit_transform(corpus)
+y = labels
+
+# Model training
+model = LogisticRegression()
+model.fit(X, y)
+
+# Response generator
+def get_response(user_input):
+    processed = preprocess(user_input)
+    vect_input = vectorizer.transform([processed])
+    prediction = model.predict(vect_input)[0]
+
+    for intent in data['intents']:
+        if intent['tag'] == prediction:
+            return random.choice(intent['responses'])
+
+# Chat loop
+print("NLTK Chatbot is running! Type 'quit' to exit.")
+while True:
+    user_input = input("You: ")
+    if user_input.lower() == 'quit':
+        break
+    response = get_response(user_input)
+    print("Bot:", response)
