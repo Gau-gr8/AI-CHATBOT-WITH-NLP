@@ -1,0 +1,24 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": ["Hi", "Hey", "Hello", "Good morning", "Good evening"],
+      "responses": ["Hello!", "Hi there!", "Hey!", "Hi! How can I help you?"]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": ["Bye", "See you", "Goodbye", "See ya"],
+      "responses": ["Goodbye!", "See you later!", "Have a great day!"]
+    },
+    {
+      "tag": "thanks",
+      "patterns": ["Thanks", "Thank you", "Appreciate it"],
+      "responses": ["You're welcome!", "No problem!", "Glad I could help!"]
+    },
+    {
+      "tag": "name",
+      "patterns": ["What is your name?", "Who are you?"],
+      "responses": ["I’m a chatbot created using NLTK!", "You can call me NLTKBot."]
+    }
+  ]
+}
