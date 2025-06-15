@@ -59,6 +59,7 @@ APPLICATIONS:
 5. ENTERTAINMENTAND COMPANIONSHIP
 
 OUTPUT:
+
 ![Image](https://github.com/user-attachments/assets/6f1bb5dd-719f-4357-99a0-d5e04c5619a1)
 
    
